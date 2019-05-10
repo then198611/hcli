@@ -1,0 +1,43 @@
+@import "../theme/default";
+@import "../mixins/index";
+@import "./button_mixin";
+
+@btn-prefix-cls: ~"@{ai-prefix}-btn";
+
+.@{btn-prefix-cls} {
+  .btn;
+  .btn-default;
+
+  &-primary {
+    .btn-primary;
+  }
+
+  &-info {
+    .btn-info;
+  }
+
+  &-success {
+    .btn-success;
+  }
+
+  &-danger {
+    .btn-danger;
+  }
+
+  &-warning {
+    .btn-warning;
+  }
+
+  &-text {
+    .btn-text;
+  }
+
+  &-group {
+    .cf;
+    .@{btn-prefix-cls} {
+      display: inline-block;
+    }
+  }
+}
+
+
