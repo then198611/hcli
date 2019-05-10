@@ -8,7 +8,6 @@ const webpackConfig = require('./webpack.config')
 
 module.exports = (args) => {
   let { input, output, exclude, uglify } = args
-  console.log(input, output, exclude, uglify)
   let entryObj = {}
   let files = glob.sync(`${input}/**/*.js`)
   files.forEach((o) => {
@@ -17,7 +16,7 @@ module.exports = (args) => {
   webpackConfig.entry = entryObj
   webpackConfig.mode = uglify ? 'production' : 'development'
   webpackConfig.output = {
-    path: path.resolve(__dirname, '../', output),
+    path: path.resolve(process.cwd(), './', output),
     filename: `[name].js`
   }
   if (!input) {
