@@ -10,6 +10,12 @@ const options = {
     describe: 'input dir',
     type: 'string'
   },
+  'r': {
+    alias: 'retain',
+    describe: 'retain input dir',
+    type: 'boolean',
+    default: false
+  },
   'o': {
     alias: 'output',
     describe: 'output dir',
@@ -46,6 +52,7 @@ program
   // 如果没有参数 该值为 true
   .option('-c, --config', `config file`)
   .option('-i, --input', `input dir or file`)
+  .option('-r, --retain', `retain input dir or file`)
   .option('-o, --output', `output dir`)
   .option('-u, --uglify', `if uglify`)
   .option('-e, --exclude', `exclude dir`)

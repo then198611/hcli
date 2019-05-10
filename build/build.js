@@ -7,12 +7,16 @@ const webpack = require('webpack')
 const webpackConfig = require('./webpack.config')
 
 module.exports = (args) => {
-  let { input, output, exclude, uglify } = args
+  let { input, output, exclude, uglify, retain } = args
+  console.log(args)
   let entryObj = {}
   let files = glob.sync(`${input}/**/*.js`)
+
   files.forEach((o) => {
-    entryObj[o.replace(`${input}/`, '').replace('.js', '')] = `./${o}`
+    let key = retain ? o.replace('.js', '') : o.replace(`${input}/`, '').replace('.js', '')
+    entryObj[key] = `./${o}`
   })
+  console.log(entryObj)
   webpackConfig.entry = entryObj
   webpackConfig.mode = uglify ? 'production' : 'development'
   webpackConfig.output = {

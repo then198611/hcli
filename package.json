@@ -1,6 +1,6 @@
 {
   "name": "hcli",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "hcli complier ES6(vue) components to ES5",
   "main": "index.js",
   "scripts": {
