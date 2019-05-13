@@ -21,7 +21,7 @@ module.exports = {
   // devtool: false,
   entry: '',
   resolveLoader: {
-    modules: [hcliMoudlePath]
+    modules: [hcliMoudlePath, 'node_modules']
   },
   optimization: {
     minimizer: [
@@ -53,7 +53,7 @@ module.exports = {
     // filename: `js/app.[chunkhash].js`
   },
   resolve: {
-    modules: [hcliMoudlePath],
+    modules: [hcliMoudlePath, 'node_modules'],
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.runtime.esm.js'
@@ -65,7 +65,7 @@ module.exports = {
         test: /\.vue$/,
         use: 'vue-loader',
         // exclude: /node_modules/,
-        include: AiArr
+        // include: AiArr
       },
       {
         test: /\.css$/,
