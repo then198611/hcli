@@ -1,4 +1,5 @@
 const path = require('path')
+const shellJs = require('shelljs')
 const { VueLoaderPlugin } = require('vue-loader')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
@@ -10,12 +11,18 @@ let AiArr = [
   resolve('node_modules/ai-ui/'),
   resolve('node_modules/ai-i/')
 ]
+let exec = shellJs.exec('npm root -g')
+let globalModulePath = exec.stdout.replace('\n', '')
+let hcliMoudlePath = `${globalModulePath}/hcli/node_modules`
 
 module.exports = {
   // mode: 'production',
   mode: 'development',
   // devtool: false,
   entry: '',
+  resolveLoader: {
+    modules: [hcliMoudlePath]
+  },
   optimization: {
     minimizer: [
       new OptimizeCSSAssetsPlugin({}),
@@ -46,6 +53,7 @@ module.exports = {
     // filename: `js/app.[chunkhash].js`
   },
   resolve: {
+    modules: [hcliMoudlePath],
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.runtime.esm.js'
@@ -56,20 +64,28 @@ module.exports = {
       {
         test: /\.vue$/,
         use: 'vue-loader',
-        // include: AiArr
+        // exclude: /node_modules/,
+        include: AiArr
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'vue-style-loader', 'css-loader', 'postcss-loader']
+        // include: AiArr,
+        use: ['vue-style-loader', 'css-loader', 'postcss-loader']
       },
       {
         test: /\.less$/,
         // include: AiArr,
-        use: [MiniCssExtractPlugin.loader, 'vue-style-loader', 'css-loader', 'postcss-loader', 'less-loader']
+        use: ['vue-style-loader', 'css-loader', 'postcss-loader', 'less-loader']
       },
       {
         test: /\.js/,
-        use: 'babel-loader'
+        include: AiArr,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            root: `${globalModulePath}/hcli`
+          }
+        }
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
