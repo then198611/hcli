@@ -3,7 +3,13 @@ const { VueLoaderPlugin } = require('vue-loader')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
-let resolve = (dir) => path.resolve(__dirname, '../', dir)
+let resolve = (dir) => path.resolve(process.cwd(), './', dir)
+
+let AiArr = [
+  resolve('node_modules/ai-act-ui/'),
+  resolve('node_modules/ai-ui/'),
+  resolve('node_modules/ai-i/')
+]
 
 module.exports = {
   // mode: 'production',
@@ -49,28 +55,26 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        use: 'vue-loader'
+        use: 'vue-loader',
+        // include: AiArr
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
+        use: [MiniCssExtractPlugin.loader, 'vue-style-loader', 'css-loader', 'postcss-loader']
       },
       {
         test: /\.less$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'less-loader']
+        // include: AiArr,
+        use: [MiniCssExtractPlugin.loader, 'vue-style-loader', 'css-loader', 'postcss-loader', 'less-loader']
       },
       {
         test: /\.js/,
-        use: 'babel-loader',
-        include: [
-          resolve('node_modules/ai-act-ui/'),
-          resolve('node_modules/ai-ui/'),
-          resolve('node_modules/ai-i/')
-        ]
+        use: 'babel-loader'
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
+        // include: AiArr,
         options: {
           limit: 1,
           // name: utils.assetsPath('img/[name].[hash:7].[ext]')
