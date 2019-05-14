@@ -8,13 +8,13 @@ const options = {
   'i': {
     alias: 'input',
     describe: 'input dir',
-    type: 'string'
+    type: 'array'
   },
   'r': {
     alias: 'retain',
     describe: 'retain input dir',
     type: 'boolean',
-    default: false
+    default: true
   },
   'o': {
     alias: 'output',
@@ -25,7 +25,7 @@ const options = {
   'e': {
     alias: 'exclude',
     describe: 'exclude dir or file',
-    type: 'string',
+    type: 'array',
     default: ''
   },
   'u': {
