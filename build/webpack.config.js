@@ -63,18 +63,14 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        use: 'vue-loader',
-        // exclude: /node_modules/,
-        // include: AiArr
+        use: 'vue-loader'
       },
       {
         test: /\.css$/,
-        // include: AiArr,
         use: ['vue-style-loader', 'css-loader', 'postcss-loader']
       },
       {
         test: /\.less$/,
-        // include: AiArr,
         use: ['vue-style-loader', 'css-loader', 'postcss-loader', 'less-loader']
       },
       {
@@ -90,11 +86,9 @@ module.exports = {
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
-        // include: AiArr,
         options: {
           limit: 1,
-          // name: utils.assetsPath('img/[name].[hash:7].[ext]')
-          name: '/assets/files/[name].[ext]'
+          name: '/assets/images/[name].[ext]'
         }
       },
       {
@@ -102,7 +96,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: '/assets/files/[name].[ext]'
+          name: '/assets/videos/[name].[ext]'
         }
       },
       {
@@ -110,7 +104,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: '/assets/files/[name].[ext]'
+          name: '/assets/fonts/[name].[ext]'
         }
       }
     ]
@@ -118,7 +112,7 @@ module.exports = {
   plugins: [
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'assets/[name].css'
+      filename: 'assets/styles/[name].css'
     })
   ]
 }
