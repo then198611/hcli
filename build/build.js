@@ -16,7 +16,12 @@ module.exports = (args) => {
   webpackConfig.mode = uglify ? 'production' : 'development'
   webpackConfig.output = {
     path: path.resolve(process.cwd(), './', output),
-    filename: `[name].js`
+    filename: `[name].js`,
+    // library: `[name]`,
+    // libraryTarget: 'umd',
+    // umdNamedDefine: true,
+    // libraryExport: "default",
+    // globalObject: 'typeof self !== \'undefined\' ? self : this'
   }
 
   const spinner = ora('building...')

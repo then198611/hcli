@@ -6,46 +6,41 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 let resolve = (dir) => path.resolve(process.cwd(), './', dir)
 
-let AiArr = [
-  resolve('node_modules/ai-act-ui/'),
-  resolve('node_modules/ai-ui/'),
-  resolve('node_modules/ai-i/')
-]
 let exec = shellJs.exec('npm root -g')
 let globalModulePath = exec.stdout.replace('\n', '')
 let hcliMoudlePath = `${globalModulePath}/hcli/node_modules`
 
 module.exports = {
-  // mode: 'production',
-  mode: 'development',
-  // devtool: false,
+  mode: 'production',
+  // mode: 'development',
+  devtool: 'source-map',
   entry: '',
   resolveLoader: {
-    modules: [hcliMoudlePath, 'node_modules']
+    modules: [hcliMoudlePath, resolve('node_modules')]
   },
   optimization: {
     minimizer: [
       new OptimizeCSSAssetsPlugin({}),
-      new TerserPlugin({
-        sourceMap: true,
-        terserOptions: {
-          ecma: undefined,
-          warnings: false,
-          parse: {},
-          compress: {},
-          mangle: true, // Note `mangle.properties` is `false` by default.
-          module: false,
-          toplevel: false,
-          nameCache: null,
-          ie8: false,
-          keep_classnames: undefined,
-          keep_fnames: false,
-          safari10: false,
-          output: {
-            comments: false
-          }
-        }
-      })
+      // new TerserPlugin({
+      //   sourceMap: true,
+      //   terserOptions: {
+      //     ecma: undefined,
+      //     warnings: false,
+      //     parse: {},
+      //     compress: {},
+      //     mangle: true, // Note `mangle.properties` is `false` by default.
+      //     module: false,
+      //     toplevel: false,
+      //     nameCache: null,
+      //     ie8: false,
+      //     keep_classnames: undefined,
+      //     keep_fnames: false,
+      //     safari10: false,
+      //     output: {
+      //       comments: false
+      //     }
+      //   }
+      // })
     ]
   },
   output: {
@@ -53,7 +48,7 @@ module.exports = {
     // filename: `js/app.[chunkhash].js`
   },
   resolve: {
-    modules: [hcliMoudlePath, 'node_modules'],
+    modules: [hcliMoudlePath, resolve('node_modules')],
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.runtime.esm.js'
@@ -67,19 +62,18 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['vue-style-loader', 'css-loader', 'postcss-loader']
+        use: ['vue-style-loader', 'css-loader']
       },
       {
         test: /\.less$/,
-        use: ['vue-style-loader', 'css-loader', 'postcss-loader', 'less-loader']
+        use: ['vue-style-loader', 'css-loader', 'less-loader']
       },
       {
         test: /\.js/,
-        include: AiArr,
         use: {
           loader: 'babel-loader',
           options: {
-            root: `${globalModulePath}/hcli`
+            configFile: `${globalModulePath}/hcli/babel.config.js`
           }
         }
       },
@@ -87,7 +81,7 @@ module.exports = {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
         options: {
-          limit: 1,
+          limit: 10000,
           name: '/assets/images/[name].[ext]'
         }
       },
