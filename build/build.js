@@ -18,10 +18,10 @@ module.exports = (args) => {
     path: path.resolve(process.cwd(), './', output),
     filename: `[name].js`,
     // library: `[name]`,
-    // libraryTarget: 'umd',
-    // umdNamedDefine: true,
-    // libraryExport: "default",
-    // globalObject: 'typeof self !== \'undefined\' ? self : this'
+    libraryTarget: 'umd',
+    umdNamedDefine: true,
+    libraryExport: "default",
+    globalObject: 'typeof self !== \'undefined\' ? self : this'
   }
 
   const spinner = ora('building...')
