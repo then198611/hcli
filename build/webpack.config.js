@@ -73,6 +73,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
+            root: `${globalModulePath}`,
             configFile: `${globalModulePath}/hcli/babel.config.js`
           }
         }

@@ -5,8 +5,7 @@ module.exports = function(api) {
 
   const presets = [
     ["@babel/preset-env", {
-      "modules": "umd",
-      "debug": true
+      "modules": false
     }]
   ]
   const plugins = [
