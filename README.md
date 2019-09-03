@@ -18,4 +18,9 @@ Options:
   -e, --exclude  exclude dir
   
   -h, --help     output usage information
+  
+  
+# symlinks
+
+在项目中link的话 请设置resolve.symlinks = false
 
