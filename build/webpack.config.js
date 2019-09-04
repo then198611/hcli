@@ -21,26 +21,26 @@ module.exports = {
   optimization: {
     minimizer: [
       new OptimizeCSSAssetsPlugin({}),
-      // new TerserPlugin({
-      //   sourceMap: true,
-      //   terserOptions: {
-      //     ecma: undefined,
-      //     warnings: false,
-      //     parse: {},
-      //     compress: {},
-      //     mangle: true, // Note `mangle.properties` is `false` by default.
-      //     module: false,
-      //     toplevel: false,
-      //     nameCache: null,
-      //     ie8: false,
-      //     keep_classnames: undefined,
-      //     keep_fnames: false,
-      //     safari10: false,
-      //     output: {
-      //       comments: false
-      //     }
-      //   }
-      // })
+      new TerserPlugin({
+        sourceMap: true,
+        terserOptions: {
+          ecma: undefined,
+          warnings: false,
+          parse: {},
+          compress: {},
+          mangle: true, // Note `mangle.properties` is `false` by default.
+          module: false,
+          toplevel: false,
+          nameCache: null,
+          ie8: false,
+          keep_classnames: undefined,
+          keep_fnames: false,
+          safari10: false,
+          output: {
+            comments: false
+          }
+        }
+      })
     ]
   },
   output: {

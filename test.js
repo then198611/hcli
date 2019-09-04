@@ -9,6 +9,11 @@ const fn2 = () => ({
   str
 })
 
+export default {
+  a: 11,
+  b: 22
+}
+
 export {
   fn1, fn2
 }
